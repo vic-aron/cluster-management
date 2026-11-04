@@ -34,6 +34,11 @@ name: cdi-scratch
 volumeType: directory
 ---
 apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: openebs
+volumeType: directory
+---
+apiVersion: v1alpha1
 kind: FilesystemTrimConfig
 interval: 168h0m0s
 ---

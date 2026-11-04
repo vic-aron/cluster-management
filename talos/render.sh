@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-talosctl gen secrets -o secrets.yaml
-chmod 600 secrets.yaml
+if [[ ! -f secrets.yaml ]]; then
+  talosctl gen secrets -o secrets.yaml
+  chmod 600 secrets.yaml
+fi
 
-talosctl gen config \
+talosctl gen config --force \
   management-cluster \
   https://10.212.212.10:6443 \
   --version "v1alpha1" \

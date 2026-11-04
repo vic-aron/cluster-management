@@ -4,10 +4,10 @@ set -euo pipefail
 # CNI
 helm install kube-ovn \
   oci://ghcr.io/kubeovn/charts/kube-ovn-v2 \
-  --version v1.16.6 \
+  --version v1.16.17 \
   --namespace kube-system \
   --create-namespace \
-  --values kube-ovn-values.yaml \
+  --values ../infrastructure/kube-ovn-v2/values.yaml \
   --wait
 
 # CSI
@@ -19,7 +19,7 @@ helm install zfs-localpv \
   --version v2.11.1 \
   --namespace openebs \
   --create-namespace \
-  --values zfs-localpv-values.yaml \
+  --values ../infrastructure/openebs/controller/values.yaml \
   --wait
 
 # Flux SSH
@@ -29,12 +29,12 @@ kubectl create namespace flux-system \
 
 kubectl create secret generic flux-git-auth \
   --namespace flux-system \
-  --from-file=identity="$HOME/.ssh/flux-github"
+  --from-file=identity="$HOME/.ssh/id_ed25519_flux"
 
 # Flux Age
 kubectl create secret generic sops-age \
   --namespace flux-system \
-  --from-file=age.agekey="$HOME/.config/sops/age/keys.txt"
+  --from-file=age.agekey="$HOME/.config/sops/age/mgmt.txt"
 
 # Flux Operator
 helm install flux-operator \
@@ -42,9 +42,7 @@ helm install flux-operator \
   --version v0.60.0 \
   --namespace flux-system \
   --create-namespace \
-  --values example \
   --wait
 
 # Flux Instance
 kubectl apply -f flux-instance.yaml
-

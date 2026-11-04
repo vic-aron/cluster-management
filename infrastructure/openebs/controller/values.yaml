@@ -1,4 +1,5 @@
 # -- Global configuration.
 zfsController:
   replicas: 1
-
+zfsNode:
+  encrKeysDir: "/var/mnt/openebs/keys"
