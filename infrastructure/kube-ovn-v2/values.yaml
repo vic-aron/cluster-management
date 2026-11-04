@@ -1,0 +1,7 @@
+ovsOvn:
+  disableModulesManagement: true
+  ovsDirectory: "/var/lib/openvswitch"
+  ovnDirectory: "/var/lib/ovn"
+  ovsIpsecKeysDirectory: "/var/lib/ovs_ipsec_keys"
+cni:
+  mountToolingDirectory: false

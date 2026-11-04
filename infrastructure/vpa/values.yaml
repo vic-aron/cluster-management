@@ -1,0 +1,11 @@
+admissionController:
+  enabled: true
+  replicas: 1
+
+recommender:
+  enabled: true
+  replicas: 1
+
+updater:
+  enabled: true
+  replicas: 1

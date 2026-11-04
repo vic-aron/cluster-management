@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-configmap
+  namespace: networking
+data:
+  Corefile: |
+    home.arpa:53 {
+      errors
+      hosts /etc/coredns/lan.hosts {
+        ttl 60
+        reload 5s
+      }
+    }
+
+    .:53 {
+      errors
+      health :8080
+      ready :8081
+      forward . 10.212.212.254
+      cache 30
+    }
+
+  lan.hosts: |
+    10.212.212.30 jellyfin.home.arpa
+    10.212.212.31 grafana.home.arpa
+    10.212.212.32 prometheus.home.arpa

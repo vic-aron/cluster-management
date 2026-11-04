@@ -1,0 +1,109 @@
+apiVersion: bootstrap.cluster.x-k8s.io/v1beta2
+kind: KubeadmConfigTemplate
+metadata:
+  name: kubeadmconfig-v1
+  namespace: templates
+spec:
+  template:
+    spec:
+      joinConfiguration:
+        skipPhases:
+          - "addon/kube-proxy"
+        nodeRegistration:
+          criSocket: unix:///run/containerd/containerd.sock
+      users:
+        - name: kpu
+          gecos: kubernetes-privileged-user
+          groups: wheel
+          sudo: "ALL=(ALL:ALL) ALL"
+          lockPassword: true
+          sshAuthorizedKeys:
+            - "example"
+      ntp:
+        servers:
+          - "0.pool.ntp.org"
+          - "1.pool.ntp.org"
+          - "2.pool.ntp.org"
+        enabled: true
+      preKubeadmCommands:
+        - "systemctl restart containerd"
+      files:
+        - path: /etc/resolv.conf
+          owner: "root:root"
+          permissions: "0644"
+          append: false
+          content: |
+            nameserver 10.212.212.253
+            search cluster.local
+            options ndots:5
+
+        - path: /etc/containerd/certs.d/registry.local/ca.crt
+          owner: "root:root"
+          permissions: "0644"
+          append: false
+          content: |
+            example
+
+        - path: /etc/containerd/certs.d/docker.io/hosts.toml
+          owner: "root:root"
+          permissions: "0644"
+          append: false
+          content: |
+            server = "https://registry-1.docker.io"
+
+            [host."https://registry.local"]
+              capabilities = ["pull", "resolve"]
+
+        - path: /etc/containerd/certs.d/quay.io/hosts.toml
+          owner: "root:root"
+          permissions: "0644"
+          append: false
+          content: |
+            server = "https://quay.io"
+
+            [host."https://registry.local"]
+              capabilities = ["pull", "resolve"]
+
+        - path: /etc/containerd/certs.d/gcr.io/hosts.toml
+          owner: "root:root"
+          permissions: "0644"
+          append: false
+          content: |
+            server = "https://gcr.io"
+
+            [host."https://registry.local"]
+              capabilities = ["pull", "resolve"]
+
+        - path: /etc/containerd/certs.d/ghcr.io/hosts.toml
+          owner: "root:root"
+          permissions: "0644"
+          append: false
+          content: |
+            server = "https://ghcr.io"
+
+            [host."https://registry.local"]
+              capabilities = ["pull", "resolve"]
+
+        - path: /etc/containerd/certs.d/registry.k8s.io/hosts.toml
+          owner: "root:root"
+          permissions: "0644"
+          append: false
+          content: |
+            server = "https://registry.k8s.io"
+
+            [host."https://registry.local"]
+              capabilities = ["pull", "resolve"]
+
+        - path: /etc/containerd/config.toml
+          owner: "root:root"
+          permissions: "0644"
+          append: true
+          content: |
+            version = 2
+
+            [plugins."io.containerd.grpc.v1.cri".registry]
+              config_path = "/etc/containerd/certs.d"
+
+    machineNaming:
+      template: default
+

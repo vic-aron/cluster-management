@@ -1,0 +1,63 @@
+apiVersion: source.extensions.fluxcd.io/v1beta1
+kind: ArtifactGenerator
+metadata:
+  name: infrastructure
+  namespace: flux-system
+spec:
+  sources:
+    - alias: repo
+      kind: GitRepository
+      name: cluster-management
+  artifacts:
+    - name: infrastructure
+      copy:
+        - from: "@repo/infrastructure/**"
+          to: "@artifact/infrastructure/"
+---
+apiVersion: source.extensions.fluxcd.io/v1beta1
+kind: ArtifactGenerator
+metadata:
+  name: platform
+  namespace: flux-system
+spec:
+  sources:
+    - alias: repo
+      kind: GitRepository
+      name: cluster-management
+  artifacts:
+    - name: platform
+      copy:
+        - from: "@repo/platform/**"
+          to: "@artifact/platform/"
+---
+apiVersion: source.extensions.fluxcd.io/v1beta1
+kind: ArtifactGenerator
+metadata:
+  name: tenant
+  namespace: flux-system
+spec:
+  sources:
+    - alias: repo
+      kind: GitRepository
+      name: cluster-management
+  artifacts:
+    - name: tenant
+      copy:
+        - from: "@repo/tenant/**"
+          to: "@artifact/tenant/"
+---
+apiVersion: source.extensions.fluxcd.io/v1beta1
+kind: ArtifactGenerator
+metadata:
+  name: qemu
+  namespace: flux-system
+spec:
+  sources:
+    - alias: repo
+      kind: GitRepository
+      name: cluster-management
+  artifacts:
+    - name: qemu
+      copy:
+        - from: "@repo/qemu/**"
+          to: "@artifact/qemu/"

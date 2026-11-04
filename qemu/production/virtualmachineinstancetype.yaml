@@ -1,0 +1,39 @@
+apiVersion: instancetype.kubevirt.io/v1beta1
+kind: VirtualMachineInstancetype
+metadata:
+  name: small
+spec:
+  cpu:
+    guest: 2
+  memory:
+    guest: 4Gi
+---
+apiVersion: instancetype.kubevirt.io/v1beta1
+kind: VirtualMachineInstancetype
+metadata:
+  name: medium
+spec:
+  cpu:
+    guest: 4
+  memory:
+    guest: 8Gi
+---
+apiVersion: instancetype.kubevirt.io/v1beta1
+kind: VirtualMachineInstancetype
+metadata:
+  name: large
+spec:
+  cpu:
+    guest: 6
+  memory:
+    guest: 12Gi
+---
+apiVersion: instancetype.kubevirt.io/v1beta1
+kind: VirtualMachineInstancetype
+metadata:
+  name: tiny
+spec:
+  cpu:
+    guest: 1
+  memory:
+    guest: 2Gi

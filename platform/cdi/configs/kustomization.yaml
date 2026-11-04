@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+#namespace: kube-system
+labels:
+  - pairs:
+      app.kubernetes.io/name: kubevirt
+      app.kubernetes.io/component: virtualization
+      app.kubernetes.io/part-of: platform
+      app.kubernetes.io/managed-by: flux
+      platform.shinoval.work/cluster-role: management
+      platform.shinoval.work/cluster-name: cluster-management
+      platform.shinoval.work/cluster-environment: production
+      platform.shinoval.work/owner: vic-aron
+      platform.shinoval.work/team: platform
+      platform.example.com/lifecycle: permanent
+    includeSelectors: false
+    includeTemplates: false
+resources:
+  - cdi-cr.yaml
+  - storageprofile.yaml
+patches:
+  - path: patch.yaml
+

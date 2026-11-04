@@ -1,0 +1,4 @@
+# -- Global configuration.
+zfsController:
+  replicas: 1
+

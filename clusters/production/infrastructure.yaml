@@ -1,0 +1,248 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: kube-ovn-v2
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/kube-ovn-v2"
+  prune: false
+  timeout: 1m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cert-manager
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/cert-manager/controller"
+  prune: true
+  timeout: 1m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cert-manager-configs
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/cert-manager/configs"
+  prune: true
+  dependsOn:
+    - name: cert-manager
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: metrics-server
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/metrics-server"
+  prune: true
+  timeout: 1m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: openebs-zfslocalpv
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/openebs/controller"
+  prune: true
+  timeout: 1m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: openebs-zfs-localpv-configs
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/openebs/configs"
+  prune: true
+  timeout: 1m
+  dependsOn:
+    - name: openebs-zfslocalpv
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: reloader
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/reloader"
+  prune: true
+  timeout: 1m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: vpa
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/vpa"
+  prune: true
+  timeout: 1m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: metallb
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/metallb/controller"
+  prune: true
+  timeout: 1m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: metallb-configs
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/metallb/configs"
+  prune: true
+  timeout: 1m
+  dependsOn:
+    - name: metallb
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: gateway-api
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/gateway-api"
+  prune: true
+  timeout: 1m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: envoy-gateway
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/envoy-gateway/controller"
+  prune: true
+  timeout: 1m
+  dependsOn:
+    - name: gateway-api
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: envoy-gateway-configs
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/envoy-gateway/configs"
+  prune: true
+  timeout: 1m
+  dependsOn:
+    - name: envoy-gateway
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: coredns
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/coredns"
+  prune: true
+  timeout: 1m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cloudflare-ddns
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/cloudflare-ddns"
+  prune: true
+  timeout: 1m
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: distribution
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: flux-system
+  sourceRef:
+    kind: ExternalArtifact
+    name: infrastructure
+  path: "./infrastructure/distribution"
+  prune: true
+  timeout: 1m

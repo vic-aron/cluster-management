@@ -1,0 +1,11 @@
+apiVersion: v1alpha1
+kind: ResolverConfig
+nameservers:
+  - address: 10.212.212.254
+    protocol: Do53
+searchDomains:
+  domains:
+    - home.arpa
+hostDNS:
+  enabled: true
+  forwardKubeDNSToHost: true

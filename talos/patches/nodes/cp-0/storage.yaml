@@ -1,0 +1,19 @@
+apiVersion: v1alpha1
+kind: RAIDArrayConfig
+name: system
+level: raid1
+metadata: "1.0"
+provisioning:
+  volumeSelector:
+    match: disk.transport == "sata" && disk.pretty_size == "64 GB" && disk.model == "TS64GSSD370"
+---
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+provisioning:
+    diskSelector:
+        match: '"/dev/disk/by-id/md-name-talos:system" in disk.symlinks'
+    wipe: true
+---
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: raid1

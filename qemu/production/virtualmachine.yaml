@@ -1,0 +1,55 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: wireguard
+  namespace: qemu
+spec:
+  template:
+    spec:
+      domain:
+        cpu:
+          cores: 2
+        memory:
+          guest: 4Gi
+        networkInterfaceMultiqueue: true
+        machine:
+          type: q35
+        autoAttachMemBalloon: false
+        features:
+          kvm:
+            hidden: false
+        firmware:
+          bootloader:
+            efi:
+              persistent: true
+              secureBoot: false
+        networks:
+          - name: eth0
+            pod: {}
+        devices:
+          rng: {}
+          watchdog:
+            name: watchdog
+            i6300esb:
+              action: reset
+          interfaces:
+            - name: eth0
+              bridge: {}
+          disks:
+            - name: os-disk
+              disk:
+                bus: virtio
+              serial: kubevirt-os
+              bootOrder: 1
+            - name: ci-disk
+              disk:
+                bus: virtio
+      volumes:
+        - name: os-disk
+          dataVolume:
+            name: os-volume
+        - name: ci-disk
+          cloudInitNoCloud:
+            userData: |
+              # cloud-config
+              example

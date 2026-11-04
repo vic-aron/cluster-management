@@ -1,0 +1,51 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kube-ovn-v2
+  namespace: flux-system
+spec:
+  interval: 12h
+  chartRef:
+    kind: OCIRepository
+    name: kube-ovn-v2
+    namespace: flux-system
+  releaseName: kube-ovn-v2
+  targetNamespace: kube-system
+  valuesFrom:
+    - kind: ConfigMap
+      name: kube-ovn-v2-values
+      valuesKey: values.yaml
+      optional: false
+  install:
+    timeout: 5m
+    crds: Create
+    createNamespace: true
+    strategy:
+      name: RemediateOnFailure
+      retryInterval: 3m
+    remediation:
+      retries: 3
+      ignoreTestFailures: false
+      remediateLastFailure: true
+  upgrade:
+    timeout: 5m
+    crds: Create
+    cleanupOnFail: false
+    strategy:
+      name: RemediateOnFailure
+      retryInterval: 3m
+    remediation:
+      retries: 3
+      strategy: rollback
+      remediateLastFailure: true
+  test:
+    enable: true
+    ignoreFailures: false
+  rollback:
+    timeout: 5m
+    cleanupOnFail: false
+  uninstall:
+    timeout: 5m
+  driftDetection:
+    mode: enabled
+
