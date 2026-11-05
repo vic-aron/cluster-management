@@ -21,7 +21,6 @@ spec:
     createNamespace: true
     strategy:
       name: RemediateOnFailure
-      retryInterval: 3m
     remediation:
       retries: 3
       ignoreTestFailures: false
@@ -32,7 +31,6 @@ spec:
     cleanupOnFail: false
     strategy:
       name: RemediateOnFailure
-      retryInterval: 3m
     remediation:
       retries: 3
       strategy: rollback
@@ -47,4 +45,3 @@ spec:
     timeout: 5m
   driftDetection:
     mode: enabled
-

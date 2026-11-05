@@ -231,6 +231,7 @@ spec:
   path: "./infrastructure/cloudflare-ddns"
   prune: true
   timeout: 1m
+  suspend: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -246,3 +247,4 @@ spec:
   path: "./infrastructure/distribution"
   prune: true
   timeout: 1m
+  suspend: true

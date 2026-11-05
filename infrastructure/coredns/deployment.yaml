@@ -26,10 +26,10 @@ spec:
           ports:
             - name: dns-udp
               containerPort: 53
-              protocol: udp
+              protocol: UDP
             - name: dns-tcp
               containerPort: 53
-              protocol: tcp
+              protocol: TCP
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -74,8 +74,8 @@ spec:
     - name: dns-udp
       port: 53
       targetPort: 53
-      protocol: udp
+      protocol: UDP
     - name: dns-tcp
       port: 53
       targetPort: 53
-      protocol: tcp
+      protocol: TCP
