@@ -16,8 +16,9 @@ labels:
     includeSelectors: false
     includeTemplates: false
 resources:
-  - cdi-cr.yaml
+  #- cdi-cr.yaml
+  - patch.yaml
   - storageprofile.yaml
-patches:
-  - path: patch.yaml
+#patches:
+#  - path: patch.yaml
 
