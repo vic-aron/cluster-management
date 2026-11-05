@@ -29,6 +29,11 @@ kubeconfig
 talosconfig
 *.talosconfig
 
+controlplane.yaml
+worker.yaml
+secrets.yaml
+rendered/
+
 # Kubernetes secrets
 *.secret
 !.secret.enc
