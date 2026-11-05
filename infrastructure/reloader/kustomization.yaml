@@ -20,6 +20,8 @@ resources:
 configMapGenerator:
   - name: reloader-values
     namespace: flux-system
+    options:
+      disableNameSuffixHash: true
     files:
       - values.yaml
 

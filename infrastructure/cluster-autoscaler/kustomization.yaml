@@ -21,6 +21,8 @@ resources:
 configMapGenerator:
   - name: cluster-autoscaler-values
     namespace: flux-system
+    options:
+      disableNameSuffixHash: true
     files:
       - values.yaml
 

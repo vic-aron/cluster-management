@@ -20,6 +20,8 @@ resources:
 configMapGenerator:
   - name: kube-ovn-v2-values
     namespace: flux-system
+    options:
+      disableNameSuffixHash: true
     files:
       - values.yaml
 

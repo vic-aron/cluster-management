@@ -20,6 +20,8 @@ resources:
 configMapGenerator:
   - name: cert-manager-values
     namespace: flux-system
+    options:
+      disableNameSuffixHash: true
     files:
       - values.yaml
 

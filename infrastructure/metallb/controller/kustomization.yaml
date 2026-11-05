@@ -21,6 +21,8 @@ resources:
 configMapGenerator:
   - name: metallb-values
     namespace: flux-system
+    options:
+      disableNameSuffixHash: true
     files:
       - values.yaml
 
