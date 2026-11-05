@@ -3,6 +3,8 @@ kind: HelmRelease
 metadata:
   name: metallb
   namespace: flux-system
+  labels:
+    reconcile.fluxcd.io/watch: Enabled
 spec:
   interval: 12h
   chart:
@@ -24,29 +26,8 @@ spec:
     timeout: 5m
     crds: Create
     createNamespace: true
-    strategy:
-      name: RemediateOnFailure
-    remediation:
-      retries: 3
-      ignoreTestFailures: false
-      remediateLastFailure: true
   upgrade:
     timeout: 5m
     crds: Create
-    cleanupOnFail: false
-    strategy:
-      name: RemediateOnFailure
-    remediation:
-      retries: 3
-      strategy: rollback
-      remediateLastFailure: true
-  test:
-    enable: true
-    ignoreFailures: false
-  rollback:
-    timeout: 5m
-    cleanupOnFail: false
-  uninstall:
-    timeout: 5m
   driftDetection:
     mode: enabled

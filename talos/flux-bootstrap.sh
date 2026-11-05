@@ -2,13 +2,13 @@
 set -euo pipefail
 
 # CNI
-#helm install kube-ovn \
-#  oci://ghcr.io/kubeovn/charts/kube-ovn-v2 \
-#  --version v1.16.17 \
-#  --namespace kube-system \
-#  --create-namespace \
-#  --values ../infrastructure/kube-ovn-v2/values.yaml \
-#  --wait
+helm install kube-ovn \
+  oci://ghcr.io/kubeovn/charts/kube-ovn-v2 \
+  --version v1.16.17 \
+  --namespace kube-system \
+  --create-namespace \
+  --values ../infrastructure/kube-ovn-v2/values.yaml \
+  --wait
 
 # CSI
 helm repo add openebs-zfslocalpv https://openebs.github.io/zfs-localpv
@@ -16,7 +16,7 @@ helm repo update
 
 helm install zfs-localpv \
   openebs-zfslocalpv/zfs-localpv \
-  --version v2.11.1 \
+  --version 2.11.1 \
   --namespace openebs \
   --create-namespace \
   --values ../infrastructure/openebs/controller/values.yaml \
@@ -45,4 +45,5 @@ helm install flux-operator \
   --wait
 
 # Flux Instance
+kubectl apply -f storageclass.yaml
 kubectl apply -f flux-instance.yaml
