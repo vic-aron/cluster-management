@@ -2,13 +2,13 @@
 set -euo pipefail
 
 # CNI
-helm install kube-ovn \
-  oci://ghcr.io/kubeovn/charts/kube-ovn-v2 \
-  --version v1.16.17 \
-  --namespace kube-system \
-  --create-namespace \
-  --values ../infrastructure/kube-ovn-v2/values.yaml \
-  --wait
+#helm install kube-ovn \
+#  oci://ghcr.io/kubeovn/charts/kube-ovn-v2 \
+#  --version v1.16.17 \
+#  --namespace kube-system \
+#  --create-namespace \
+#  --values ../infrastructure/kube-ovn-v2/values.yaml \
+#  --wait
 
 # CSI
 helm repo add openebs-zfslocalpv https://openebs.github.io/zfs-localpv
@@ -39,7 +39,7 @@ kubectl create secret generic sops-age \
 # Flux Operator
 helm install flux-operator \
     oci://ghcr.io/controlplaneio-fluxcd/charts/flux-operator \
-  --version v0.60.0 \
+  --version 0.60.0 \
   --namespace flux-system \
   --create-namespace \
   --wait
