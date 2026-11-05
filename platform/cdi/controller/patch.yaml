@@ -13,7 +13,7 @@ spec:
         memory: "250Mi"
     scratchSpaceStorageClass: openebs-localpv
     featureGates:
-    - HonorWaitForFirstConsumer
+      - HonorWaitForFirstConsumer
   imagePullPolicy: IfNotPresent
   infra:
     nodeSelector:
@@ -21,4 +21,3 @@ spec:
   workload:
     nodeSelector:
       kubernetes.io/os: linux
-

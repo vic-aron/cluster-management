@@ -4,7 +4,8 @@ metadata:
   name: metallb
   namespace: metallb-system
 spec:
-  interval: 12h
+  interval: 15m
+  timeout: 5m
   chart:
     spec:
       chart: metallb
@@ -15,17 +16,23 @@ spec:
         namespace: flux-system
   releaseName: metallb
   targetNamespace: metallb-system
+  install:
+    createNamespace: true
+    crds: Create
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 5m
+  upgrade:
+    crds: CreateReplace
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 5m
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
   valuesFrom:
     - kind: ConfigMap
       name: metallb-values
       valuesKey: values.yaml
       optional: false
-  install:
-    timeout: 5m
-    crds: Create
-    createNamespace: true
-  upgrade:
-    timeout: 5m
-    crds: Create
-  driftDetection:
-    mode: enabled

@@ -1,28 +1,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-#namespace: kube-system
+namespace: kube-system
 labels:
   - pairs:
-      app.kubernetes.io/name: metrics-server
-      app.kubernetes.io/component: metrics
+      app.kubernetes.io/name: cluster-autoscaler
+      app.kubernetes.io/component: autoscaling
       app.kubernetes.io/part-of: infrastructure
       app.kubernetes.io/managed-by: flux
-      platform.shinoval.work/cluster-role: management
-      platform.shinoval.work/cluster-name: cluster-management
-      platform.shinoval.work/cluster-environment: production
-      platform.shinoval.work/owner: vic-aron
-      platform.shinoval.work/team: platform
-      platform.example.com/lifecycle: permanent
+      platform.shinoval.work/cluster: management
+      platform.shinoval.work/environment: production
     includeSelectors: false
     includeTemplates: false
 resources:
   - helmrepository.yaml
   - helmrelease.yaml
-configMapGenerator:
-  - name: cluster-autoscaler-values
-    namespace: flux-system
-    options:
-      disableNameSuffixHash: true
-    files:
-      - values.yaml
-

@@ -1,19 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: capk-system
 labels:
   - pairs:
       app.kubernetes.io/name: cluster-api
-      app.kubernetes.io/component: kubeception
+      app.kubernetes.io/component: bootstrap
       app.kubernetes.io/part-of: platform
       app.kubernetes.io/managed-by: flux
-      platform.shinoval.work/cluster-role: management
-      platform.shinoval.work/cluster-name: cluster-management
-      platform.shinoval.work/cluster-environment: production
-      platform.shinoval.work/owner: vic-aron
-      platform.shinoval.work/team: platform
-      platform.example.com/lifecycle: permanent
+      platform.shinoval.work/cluster: management
+      platform.shinoval.work/environment: production
     includeSelectors: false
     includeTemplates: false
 resources:
   - provider.yaml
-

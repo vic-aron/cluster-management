@@ -11,4 +11,3 @@ spec:
   url: oci://quay.io/jetstack/charts/cert-manager
   ref:
     semver: "1.21.x"
-

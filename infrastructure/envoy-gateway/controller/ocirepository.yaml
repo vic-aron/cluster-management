@@ -11,4 +11,3 @@ spec:
   url: oci://docker.io/envoyproxy/gateway-helm
   ref:
     semver: "1.9.x"
-

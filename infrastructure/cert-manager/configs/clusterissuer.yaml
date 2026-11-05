@@ -4,4 +4,3 @@ metadata:
   name: lan-root-selfsigned
 spec:
   selfSigned: {}
-

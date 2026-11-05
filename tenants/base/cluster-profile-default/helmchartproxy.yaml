@@ -34,7 +34,6 @@ spec:
       enabled: true
       rollOutPods: true
       replicas: 1
-
 ---
 apiVersion: addons.cluster.x-k8s.io/v1alpha1
 kind: HelmChartProxy
@@ -52,7 +51,6 @@ spec:
   strategy: ApplyOnce
   valuesTemplate: |
     replicas: 1
-
 ---
 apiVersion: addons.cluster.x-k8s.io/v1alpha1
 kind: HelmChartProxy
@@ -76,7 +74,6 @@ spec:
       replicaCount: 1
     cainjector:
       replicaCount: 1
-
 ---
 apiVersion: addons.cluster.x-k8s.io/v1alpha1
 kind: HelmChartProxy
@@ -103,7 +100,6 @@ spec:
       parameters:
         protocol: nvmf
         repl: 1
-
 ---
 apiVersion: addons.cluster.x-k8s.io/v1alpha1
 kind: HelmChartProxy
@@ -121,7 +117,6 @@ spec:
   strategy: ApplyOnce
   valuesTemplate: |
     schedule: "*/5 * * * *"
-
 ---
 apiVersion: addons.cluster.x-k8s.io/v1alpha1
 kind: HelmChartProxy
@@ -140,4 +135,3 @@ spec:
   valuesTemplate: |
     configuration:
       period: "1h0m0s"
-

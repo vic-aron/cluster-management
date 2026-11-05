@@ -11,4 +11,3 @@ spec:
   url: oci://ghcr.io/kubeovn/charts/kube-ovn-v2
   ref:
     semver: "v1.16.x"
-

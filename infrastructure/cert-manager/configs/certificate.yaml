@@ -16,4 +16,3 @@ spec:
     name: lan-root-selfsigned
     kind: ClusterIssuer
     group: cert-manager.io
-

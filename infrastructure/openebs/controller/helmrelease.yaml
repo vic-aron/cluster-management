@@ -4,7 +4,8 @@ metadata:
   name: openebs-zfslocalpv
   namespace: flux-system
 spec:
-  interval: 12h
+  interval: 15m
+  timeout: 5m
   chart:
     spec:
       chart: zfs-localpv
@@ -14,39 +15,24 @@ spec:
         name: openebs-zfslocalpv
         namespace: flux-system
   releaseName: zfs-localpv
-  targetNamespace: kube-system
+  targetNamespace: openebs
+  install:
+    createNamespace: true
+    crds: Create
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 5m
+  upgrade:
+    crds: CreateReplace
+    strategy:
+      name: RetryOnFailure
+      retryInterval: 5m
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
   valuesFrom:
     - kind: ConfigMap
       name: zfs-localpv-values
       valuesKey: values.yaml
       optional: false
-  install:
-    timeout: 5m
-    crds: Create
-    createNamespace: true
-    strategy:
-      name: RemediateOnFailure
-    remediation:
-      retries: 3
-      ignoreTestFailures: false
-      remediateLastFailure: true
-  upgrade:
-    timeout: 5m
-    crds: Create
-    cleanupOnFail: false
-    strategy:
-      name: RemediateOnFailure
-    remediation:
-      retries: 3
-      strategy: rollback
-      remediateLastFailure: true
-  test:
-    enable: true
-    ignoreFailures: false
-  rollback:
-    timeout: 5m
-    cleanupOnFail: false
-  uninstall:
-    timeout: 5m
-  driftDetection:
-    mode: enabled

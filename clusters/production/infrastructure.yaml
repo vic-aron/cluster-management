@@ -239,3 +239,12 @@ spec:
   prune: true
   timeout: 3m
   suspend: true
+  ignore:
+    - paths:
+        - /spec/suspend
+      target:
+        group: kustomize.toolkit.fluxcd.io
+        version: v1
+        kind: Kustomization
+        name: distribution
+        namespace: flux-system

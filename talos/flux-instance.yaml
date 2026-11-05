@@ -26,13 +26,10 @@ spec:
     - image-automation-controller
   cluster:
     type: kubernetes
-    size: medium
+    size: small
     multitenant: false
     networkPolicy: true
     domain: "cluster.local"
-  storage:
-    class: "openebs-zfspv-delete-128k"
-    size: "10Gi"
   commonMetadata:
     labels:
       app.kubernetes.io/name: flux
