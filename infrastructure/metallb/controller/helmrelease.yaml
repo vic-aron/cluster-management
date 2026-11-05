@@ -2,9 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: metallb
-  namespace: flux-system
-  labels:
-    reconcile.fluxcd.io/watch: Enabled
+  namespace: metallb-system
 spec:
   interval: 12h
   chart:

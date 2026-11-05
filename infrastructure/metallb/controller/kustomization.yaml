@@ -20,7 +20,7 @@ resources:
   - helmrelease.yaml
 configMapGenerator:
   - name: metallb-values
-    namespace: flux-system
+    namespace: metallb-system
     options:
       disableNameSuffixHash: true
     files:
