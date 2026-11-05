@@ -14,7 +14,7 @@ spec:
         name: metallb
         namespace: flux-system
   releaseName: metallb
-  targetNamespace: metallb
+  targetNamespace: metallb-system
   valuesFrom:
     - kind: ConfigMap
       name: metallb-values
