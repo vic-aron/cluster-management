@@ -10,15 +10,15 @@ metadata:
 spec:
   sync:
     kind: GitRepository
-    url: "https://github.com/vic-aron/cluster-managementgit"
+    url: "https://github.com/vic-aron/cluster-management"
     ref: "refs/heads/main"
-    path: "cluster/production"
-    pullSecret: "flux-system"
+    path: "clusters/production"
   distribution:
     version: "2.8.x"
     registry: "ghcr.io/fluxcd"
   components:
     - source-controller
+    - source-watcher
     - kustomize-controller
     - helm-controller
     - notification-controller
@@ -27,7 +27,7 @@ spec:
   cluster:
     type: kubernetes
     size: medium
-    multitenant: true
+    multitenant: false
     networkPolicy: true
     domain: "cluster.local"
   storage:
