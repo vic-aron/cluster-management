@@ -21,4 +21,4 @@ resources:
   - cdi-cr.yaml
   - service.yaml
 patches:
-  - patch: patch.yaml
+  - path: patch.yaml
