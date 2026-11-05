@@ -5,6 +5,7 @@ metadata:
   namespace: cdi
 spec:
   type: LoadBalancer
+  loadBalancerIP: 10.212.212.88
   selector:
     cdi.kubevirt.io: cdi-uploadproxy
   ports:
@@ -12,4 +13,3 @@ spec:
       port: 443
       targetPort: 8443
       protocol: TCP
-

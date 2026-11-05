@@ -67,7 +67,7 @@ metadata:
   namespace: networking
 spec:
   type: LoadBalancer
-  loadBalancerIP: 10.212.212.253
+  loadBalancerIP: 10.212.212.89
   selector:
     app: coredns
   ports:
