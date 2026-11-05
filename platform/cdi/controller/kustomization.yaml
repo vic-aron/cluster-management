@@ -18,5 +18,7 @@ labels:
 resources:
   - cdi-operator.yaml
   - network-policies.yaml
+  - cdi-cr.yaml
   - service.yaml
-
+patches:
+  - patch: patch.yaml
