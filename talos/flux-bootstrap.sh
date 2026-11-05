@@ -11,16 +11,16 @@ helm install kube-ovn \
   --wait
 
 # CSI
-helm repo add openebs-zfslocalpv https://openebs.github.io/zfs-localpv
-helm repo update
-
-helm install zfs-localpv \
-  openebs-zfslocalpv/zfs-localpv \
-  --version 2.11.1 \
-  --namespace openebs \
-  --create-namespace \
-  --values ../infrastructure/openebs/controller/values.yaml \
-  --wait
+#helm repo add openebs-zfslocalpv https://openebs.github.io/zfs-localpv
+#helm repo update
+#
+#helm install zfs-localpv \
+#  openebs-zfslocalpv/zfs-localpv \
+#  --version 2.11.1 \
+#  --namespace openebs \
+#  --create-namespace \
+#  --values ../infrastructure/openebs/controller/values.yaml \
+#  --wait
 
 # Flux SSH
 kubectl create namespace flux-system \
@@ -45,5 +45,5 @@ helm install flux-operator \
   --wait
 
 # Flux Instance
-kubectl apply -f storageclass.yaml
+#kubectl apply -f storageclass.yaml
 kubectl apply -f flux-instance.yaml
