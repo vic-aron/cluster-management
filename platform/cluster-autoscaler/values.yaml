@@ -1,28 +1,29 @@
-cloudProvider: clusterapi
-
-autoDiscovery:
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-autoscaler-values
+  namespace: kube-system
   labels:
-    - "cluster.x-k8s.io/cluster-api-autoscaler-enabled=true"
-
-clusterAPIMode: kubeconfig-incluster
-
-clusterAPIWorkloadKubeconfigPath: /etc/kubernetes/workload-kubeconfig
-
-rbac:
-  create: true
-  clusterScoped: true
-
-replicaCount: 1
-
-priorityClassName: system-cluster-critical
-
-resources:
-  requests:
-    cpu: 100m
-    memory: 300Mi
-
-extraArgs:
-  scan-interval: 10s
-  scale-down-enabled: true
-  scale-down-utilization-threshold: "0.5"
-  skip-nodes-with-local-storage: false
+    reconcile.fluxcd.io/watch: Enabled
+data:
+  values.yaml: |
+    cloudProvider: clusterapi
+    autoDiscovery:
+      labels:
+        - "cluster.x-k8s.io/cluster-api-autoscaler-enabled=true"
+    clusterAPIMode: kubeconfig-incluster
+    clusterAPIWorkloadKubeconfigPath: /etc/kubernetes/workload-kubeconfig
+    rbac:
+      create: true
+      clusterScoped: true
+    replicaCount: 1
+    priorityClassName: system-cluster-critical
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
+    extraArgs:
+      scan-interval: 10s
+      scale-down-enabled: true
+      scale-down-utilization-threshold: "0.5"
+      skip-nodes-with-local-storage: false

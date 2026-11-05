@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: kube-ovn-v2
-  namespace: flux-system
+  namespace: kube-system
 spec:
   interval: 15m
   timeout: 5m

@@ -1,7 +1,16 @@
-ovsOvn:
-  disableModulesManagement: true
-  ovsDirectory: "/var/lib/openvswitch"
-  ovnDirectory: "/var/lib/ovn"
-  ovsIpsecKeysDirectory: "/var/lib/ovs_ipsec_keys"
-cni:
-  mountToolingDirectory: false
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-ovn-v2-values
+  namespace: kube-system
+  labels:
+    reconcile.fluxcd.io/watch: Enabled
+data:
+  values.yaml: |
+    ovsOvn:
+      disableModulesManagement: true
+      ovsDirectory: "/var/lib/openvswitch"
+      ovnDirectory: "/var/lib/ovn"
+      ovsIpsecKeysDirectory: "/var/lib/ovs_ipsec_keys"
+    cni:
+      mountToolingDirectory: false

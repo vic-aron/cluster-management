@@ -1,5 +1,13 @@
-# -- Global configuration.
-zfsController:
-  replicas: 1
-zfsNode:
-  encrKeysDir: "/var/mnt/openebs/keys"
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: openebs-zfs-values
+  namespace: openebs
+  labels:
+    reconcile.fluxcd.io/watch: Enabled
+data:
+  values.yaml: |
+    zfsController:
+      replicas: 1
+    zfsNode:
+      encrKeysDir: "/var/mnt/openebs/keys"

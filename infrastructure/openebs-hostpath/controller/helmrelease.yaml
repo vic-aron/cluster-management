@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: openebs-localpv
-  namespace: flux-system
+  namespace: openebs
 spec:
   interval: 15m
   timeout: 5m
@@ -33,6 +33,6 @@ spec:
     mode: enabled
   valuesFrom:
     - kind: ConfigMap
-      name: openebs-localpv-values
+      name: openebs-hostpath-values
       valuesKey: values.yaml
       optional: false
