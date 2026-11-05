@@ -21,6 +21,8 @@ resources:
 configMapGenerator:
   - name: metrics-server-values
     namespace: flux-system
+    options:
+      disableNameSuffixHash: true
     files:
       - values.yaml
 
