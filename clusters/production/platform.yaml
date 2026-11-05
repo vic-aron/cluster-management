@@ -5,13 +5,13 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  targetNamespace: flux-system
+  targetNamespace: kubevirt
   sourceRef:
     kind: ExternalArtifact
     name: platform
   path: "./platform/kubevirt"
   prune: true
-  timeout: 1m
+  timeout: 3m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -20,13 +20,13 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  targetNamespace: flux-system
+  targetNamespace: cdi
   sourceRef:
     kind: ExternalArtifact
     name: platform
   path: "./platform/cdi"
   prune: true
-  timeout: 1m
+  timeout: 3m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -35,13 +35,13 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  targetNamespace: flux-system
+  targetNamespace: capi-system
   sourceRef:
     kind: ExternalArtifact
     name: platform
   path: "./platform/capi"
   prune: true
-  timeout: 1m
+  timeout: 3m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -50,13 +50,13 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  targetNamespace: flux-system
+  targetNamespace: capk-system
   sourceRef:
     kind: ExternalArtifact
     name: platform
   path: "./platform/capi/provider"
   prune: true
-  timeout: 1m
+  timeout: 3m
   dependsOn:
     - name: kubevirt
 ---
@@ -67,11 +67,10 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  targetNamespace: flux-system
+  targetNamespace: kube-system
   sourceRef:
     kind: ExternalArtifact
     name: platform
   path: "./platform/cluster-autoscaler"
   prune: true
-  timeout: 1m
-
+  timeout: 3m
