@@ -5,7 +5,6 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  targetNamespace: kubevirt
   sourceRef:
     kind: ExternalArtifact
     name: platform
@@ -20,7 +19,6 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  targetNamespace: cdi
   sourceRef:
     kind: ExternalArtifact
     name: platform
@@ -35,7 +33,6 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  targetNamespace: capi-system
   sourceRef:
     kind: ExternalArtifact
     name: platform
@@ -50,7 +47,6 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  targetNamespace: capk-system
   sourceRef:
     kind: ExternalArtifact
     name: platform
@@ -67,7 +63,6 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  targetNamespace: kube-system
   sourceRef:
     kind: ExternalArtifact
     name: platform
