@@ -25,6 +25,8 @@ spec:
   path: "./platform/cdi/controller"
   prune: true
   timeout: 3m
+  dependsOn:
+    - name: kubevirt
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -41,6 +43,11 @@ spec:
   timeout: 3m
   dependsOn:
     - name: cdi
+  healthChecks:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      kind: CDI
+      name: cdi
+      namespace: cdi
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
